@@ -2,9 +2,11 @@
   "type": "module",
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
     "lucide": "^0.563.0",
     "lucide-react": "^0.563.0",
     "mongodb": "^7.1.0",
