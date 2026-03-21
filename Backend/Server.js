@@ -10,10 +10,12 @@ import { connectToDB } from './config/db.js';
 import User from './models/user.model.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from "bcrypt";
+import cookieParser from 'cookie-parser';
 
 const app = express();
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());//middleware to parse json data from request body
+app.use(cookieParser());
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
@@ -91,6 +93,28 @@ app.post('/api/login', async (req, res) => {
     }
     catch (error) {
         console.error("Error during login:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+})
+
+app.get("/api/fetch-user", async (req, res) => {
+    const { token } = req.cookies
+    if (!token) {
+        return res.status(401).json({ message: "No token provided" })
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        if (!decoded) {
+            return res.status(401).json({ message: "Invalid token" })
+        }
+        const userDoc = await User.findById(decoded.id).select("-password")
+        if (!userDoc) {
+            return res.status(404).json({ message: "User not found" })
+        }
+        res.status(200).json({ user: userDoc })
+    }
+    catch (error) {
+        console.error("Error fetching user:", error);
         res.status(500).json({ message: "Internal server error" });
     }
 })
