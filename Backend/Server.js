@@ -97,6 +97,7 @@ app.post('/api/login', async (req, res) => {
     }
 })
 
+// route to fetch user data based on the token sent in the cookie
 app.get("/api/fetch-user", async (req, res) => {
     const { token } = req.cookies
     if (!token) {
@@ -117,6 +118,12 @@ app.get("/api/fetch-user", async (req, res) => {
         console.error("Error fetching user:", error);
         res.status(500).json({ message: "Internal server error" });
     }
+})
+
+//for logout we will just clear the token cookie on the client side
+app.post("/api/logout", (req, res) => {
+    res.clearCookie("token")
+    res.status(200).json({ message: "Logged out successfully" })
 })
 
 app.get("/", (req, res) => {
