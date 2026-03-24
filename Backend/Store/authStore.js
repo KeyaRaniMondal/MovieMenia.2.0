@@ -1,8 +1,8 @@
 
-import {create} from 'zustand';
+import { create } from 'zustand'
 import axios from 'axios';
-
-export const useAuthStore=create((set)=>({
+axios.defaults.withCredentials=true; // Enable sending cookies with requests
+export const useAuthStore=create((set) => ({
     User:null,
     isLoading:false,
     error:null,

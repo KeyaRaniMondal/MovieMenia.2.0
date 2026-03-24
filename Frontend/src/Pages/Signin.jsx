@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import signinImg from '../assets/signin.png';
 
 const SignIn = () => {

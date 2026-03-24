@@ -1,6 +1,6 @@
 import { Search } from "lucide-react";
 import logo from "../assets/logo.jpg"
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from "../assets/logo.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const CardList = ({ title = "Top Rated", category = "" }) => {
     const [data, setData] = useState([]);
