@@ -26,4 +26,27 @@ export const useAuthStore = create((set) => ({
       set({ isLoading: false });
     }
   },
+
+  login: async (username, password) => {
+    set({ isLoading: true, error: null, message: null });
+
+    try {
+      const response = await axios.post("/api/login", {
+        username,
+        password,
+      });
+      set({ user: response.data.user, message: response.data.message });
+      return response.data;
+    } catch (error) {
+      set({
+        error:
+          error.response?.data?.message ||
+          error.message ||
+          "Error logging in",
+      });
+      throw error;
+    } finally {
+      set({ isLoading: false });
+    }
+  },
 }));
