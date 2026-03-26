@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import Navbar from './Componenets/navbar'
 import Homepage from './Pages/Homepage'
@@ -8,9 +6,19 @@ import { Route, Routes } from 'react-router-dom'
 import MoviePage from './Pages/MoviePage'
 import SignIn from './Pages/Signin'
 import SignUp from './Pages/Signup'
+import { useAuthStore } from './store/authStore'
+import { useEffect } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
+ const {fetchUser,fetchingUser}=useAuthStore()
+useEffect(()=>{
+  fetchUser()
+},[fetchUser])
+
+if(fetchingUser){
+  return <p>Loading..........</p>
+}
+
 
   return (
     <>
