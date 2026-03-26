@@ -42,9 +42,11 @@ const Navbar = () => {
             <input type="text" className="bg-[#333333] px-4 py-2 border rounded-full min-w-72 pr-10 outline-none" placeholder="Search......" />
             <Search className="absolute top-2 right-4 w-5 h-5" />
           </div>
-          <button className="bg-[#e50914] px-5 py-2 text-white cursor-pointer">
+          <Link to={user?"ai-recommendations":"signin"}>
+                    <button className="bg-[#e50914] px-5 py-2 text-white cursor-pointer">
             Get AI Movie Picks
           </button>
+          </Link>
 
           {user ? (
             <>

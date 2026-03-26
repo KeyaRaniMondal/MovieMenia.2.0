@@ -8,6 +8,7 @@ import SignIn from './Pages/Signin'
 import SignUp from './Pages/Signup'
 import { useAuthStore } from './store/authStore'
 import { useEffect } from 'react'
+import AIRecommendations from './Pages/AiRecommendation'
 
 function App() {
  const {fetchUser,fetchingUser}=useAuthStore()
@@ -29,6 +30,7 @@ if(fetchingUser){
     <Route path='/movie/:id' element={<MoviePage/>}/>
     <Route path='/signin' element={<SignIn/>}/>
     <Route path='/signup' element={<SignUp/>}/>
+    <Route path='/ai-recommendations' element={<AIRecommendations/>}/>
   </Routes>
 </div>
     </>
