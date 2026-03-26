@@ -101,16 +101,16 @@ app.post('/api/login', async (req, res) => {
 app.get("/api/fetch-user", async (req, res) => {
     const { token } = req.cookies
     if (!token) {
-        return res.status(401).json({ message: "No token provided" })
+        return res.status(200).json({ user: null })
     }
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         if (!decoded) {
-            return res.status(401).json({ message: "Invalid token" })
+            return res.status(200).json({ user: null })
         }
         const userDoc = await User.findById(decoded.id).select("-password")
         if (!userDoc) {
-            return res.status(404).json({ message: "User not found" })
+            return res.status(200).json({ user: null })
         }
         res.status(200).json({ user: userDoc })
     }

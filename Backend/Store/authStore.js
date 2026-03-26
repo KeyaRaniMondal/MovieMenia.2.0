@@ -57,12 +57,28 @@ export const useAuthStore = create((set) => ({
     }
   },
   fetchUser: async () => {
-    set({ fetchingUser: true }); 
+    set({ fetchingUser: true });
     try {
-      const response = await axios.get("http://localhost:5000/api/fetch-user");
-      set({ user: response.data.user, fetchingUser: false }); 
+      const response = await axios.get("api/fetch-user");
+      set({ user: response.data.user, fetchingUser: false });
     } catch (error) {
       set({ user: null, fetchingUser: false }); // Reset if unauthorized
     }
   },
+  logout: async () => {
+    set({ isLoading: true, error: null, message: null });
+    try {
+      const response = await axios.post('api/logout');
+      const { message } = response.data;
+      set({
+        user: null,
+        isLoading: false,
+        error: null,
+        message
+      });
+      return message;
+    } catch (error) {
+      set({ isError: true, isLoading: false, error: "error logging out" });
+    }
+  }
 }))
