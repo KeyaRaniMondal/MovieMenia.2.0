@@ -2,6 +2,7 @@ import { create } from "zustand";
 import axios from "axios";
 
 axios.defaults.withCredentials = true; // Enable sending cookies with requests
+const API_URL="https://moviemenia-2-0.onrender.com/api"
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -14,7 +15,7 @@ export const useAuthStore = create((set) => ({
     set({ isLoading: true, error: null, message: null });
 
     try {
-      const response = await axios.post("/api/signup", {
+      const response = await axios.post(`${API_URL}/api/signup`, {
         username,
         email,
         password,
@@ -31,7 +32,7 @@ export const useAuthStore = create((set) => ({
     set({ isLoading: true, error: null, message: null });
 
     try {
-      const response = await axios.post("/api/login", {
+      const response = await axios.post(`${API_URL}/api/login`, {
         username,
         password,
       });
@@ -53,7 +54,7 @@ export const useAuthStore = create((set) => ({
   fetchUser: async () => {
     set({ fetchingUser: true });
     try {
-      const response = await axios.get("/api/fetch-user");
+      const response = await axios.get(`${API_URL}/api/fetch-user`);
       set({ user: response.data.user, fetchingUser: false });
     } catch (error) {
       set({ user: null, fetchingUser: false });
@@ -63,7 +64,7 @@ export const useAuthStore = create((set) => ({
   logout: async () => {
     set({ isLoading: true, error: null, message: null });
     try {
-      const response = await axios.post("/api/logout");
+      const response = await axios.post(`${API_URL}/api/logout`);
       set({
         user: null,
         isLoading: false,
