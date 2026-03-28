@@ -15,7 +15,23 @@ import cookieParser from 'cookie-parser';
 dotenv.config();
 
 const app = express();
-app.use(cors({ origin: process.env.Client_URL, credentials: true })); // Enable CORS for all routes
+const allowedOrigins = [
+  'http://localhost:5173',  // For local development
+  'https://moviemenia-2-0-1.onrender.com'  // deployed frontend
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+// app.use(cors({ origin: process.env.Client_URL, credentials: true })); // Enable CORS for all routes
 app.use(express.json());//middleware to parse json data from request body
 app.use(cookieParser());
 

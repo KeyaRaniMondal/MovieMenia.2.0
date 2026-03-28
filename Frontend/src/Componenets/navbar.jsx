@@ -28,7 +28,7 @@ const Navbar = () => {
           <img src={logo} alt="NetFlix Logo" className="w-24 cursor-pointer" />
         </label>
         <ul className="hidden xl:flex space-x-6 ">
-          <li className="cursor-pointer hover:text-[#e50914]">Home</li>
+          <Link to={'/'} className="cursor-pointer hover:text-[#e50914]">Home</Link>
           <li className="cursor-pointer hover:text-[#e50914]">Tv Shows</li>
           <li className="cursor-pointer hover:text-[#e50914]">Movies</li>
           <li className="cursor-pointer hover:text-[#e50914]">Anime</li>
