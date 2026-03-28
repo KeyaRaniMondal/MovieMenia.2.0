@@ -2,7 +2,7 @@ import { create } from "zustand";
 import axios from "axios";
 
 axios.defaults.withCredentials = true; // Enable sending cookies with requests
-const API_URL="https://moviemenia-2-0.onrender.com/api"
+const API_URL="https://moviemenia-2-0.onrender.com"
 
 export const useAuthStore = create((set) => ({
   user: null,
