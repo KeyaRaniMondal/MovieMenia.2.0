@@ -1,11 +1,12 @@
 import { HelpCircle, LogOut, Search, Settings } from "lucide-react";
 import logo from "../assets/logo.jpg"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import { useState } from "react";
 
 const Navbar = () => {
   const { user, logout } = useAuthStore()
+  const navigate = useNavigate();
   const avatarURL = user
     ? `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
       user.username
@@ -13,7 +14,16 @@ const Navbar = () => {
     : null;
 
   const [showMenu, setShowMenu] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const toggleMenu = () => setShowMenu(!showMenu);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+      setSearchQuery("");
+    }
+  };
 
   const handleLogout = async () => {
     const message = await logout(); // Calls API and clears cookies
@@ -38,10 +48,18 @@ const Navbar = () => {
         </ul>
 
         <div className="flex items-center space-x-4 relative">
-          <div className="relative hidden md:inline-flex">
-            <input type="text" className="bg-[#333333] px-4 py-2 border rounded-full min-w-72 pr-10 outline-none" placeholder="Search......" />
-            <Search className="absolute top-2 right-4 w-5 h-5" />
-          </div>
+          <form onSubmit={handleSearch} className="relative hidden md:inline-flex">
+            <input 
+              type="text" 
+              className="bg-[#333333] px-4 py-2 border rounded-full min-w-72 pr-10 outline-none focus:border-[#e50914]" 
+              placeholder="Search......"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <button type="submit" className="absolute top-2 right-4 w-5 h-5 cursor-pointer hover:text-[#e50914]">
+              <Search className="w-5 h-5" />
+            </button>
+          </form>
           <Link to={user?"ai-recommendations":"signin"}>
                     <button className="bg-[#e50914] px-5 py-2 text-white cursor-pointer">
             Get AI Movie Picks
