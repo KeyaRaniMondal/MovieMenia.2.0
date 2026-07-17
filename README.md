@@ -2,14 +2,16 @@
 
 **Home Page**
 ![Home page](<Screenshot 2026-01-27 125213.png>)
+---
 
 **Movie Details with Recommendations**
 ![Movie details](<localhost_5173_movie_1084242 (1).png>)
+---
 
 # 🔗 Live Links
 
 ### 🌐 Live Website
-<p align="center">
+<p>
   <a href="moviemenia-2-0-1.onrender.com/">
     <img src="https://img.shields.io/badge/🌐_Live_Demo-Visit-success?style=for-the-badge">
   </a>
@@ -18,13 +20,11 @@
 ### Github Repository
 <p>
   <a href="https://github.com/KeyaRaniMondal/MovieMenia.2.0">
-    <img src="https://img.shields.io/badge/Frontend-GitHub-blue?style=for-the-badge&logo=github">
+    <img src="https://img.shields.io/badge/GitHub-blue?style=for-the-badge&logo=github">
   </a>
 </p>
 
 ---
-
-# 📖 Overview
 
 # 📖 Overview
 
@@ -250,12 +250,6 @@ git push origin feature/NewFeature
 ```
 
 5. Open a Pull Request
-
----
-
-# 📄 License
-
-This project is licensed under the MIT License.
 
 ---
 ⭐ If you like this project, don't forget to give it a star!
