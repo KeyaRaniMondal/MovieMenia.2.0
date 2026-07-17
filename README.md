@@ -12,7 +12,7 @@
 
 ### 🌐 Live Website
 <p>
-  <a href="moviemenia-2-0-1.onrender.com/">
+  <a href="https://moviemenia-2-0-1.onrender.com/">
     <img src="https://img.shields.io/badge/🌐_Live_Demo-Visit-success?style=for-the-badge">
   </a>
 </p>
