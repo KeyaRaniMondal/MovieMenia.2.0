@@ -2,8 +2,7 @@ import { create } from "zustand";
 import axios from "axios";
 
 axios.defaults.withCredentials = true; // Enable sending cookies with requests
-// const API_URL="http://localhost:5000"
-const API_URL="https://moviemenia-2-0.onrender.com"
+const API_URL = import.meta.env.VITE_API_URL || "";
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -57,7 +56,7 @@ export const useAuthStore = create((set) => ({
     try {
       const response = await axios.get(`${API_URL}/api/fetch-user`);
       set({ user: response.data.user, fetchingUser: false });
-    } catch (error) {
+    } catch {
       set({ user: null, fetchingUser: false });
     }
   },

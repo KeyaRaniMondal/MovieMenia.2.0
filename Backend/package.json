@@ -24,7 +24,8 @@
   "description": "",
   "main": "Server.js",
   "scripts": {
-    "start": "nodeServer.js",
+    "start": "node Server.js",
+    "dev": "nodemon Server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

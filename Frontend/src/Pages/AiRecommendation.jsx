@@ -58,7 +58,7 @@ const AIRecommendations = () => {
       try {
         const recommendationArray = JSON.parse(cleanedResult);
         setRecommendations(recommendationArray);
-      } catch (error) {
+      } catch {
         toast.error("Failed to process recommendations");
       }
     } else {
@@ -80,7 +80,6 @@ const AIRecommendations = () => {
   // Multi-step Questionnaire UI
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#181818] via-[#232323] to-[#181818] relative overflow-hidden">
-      <img src="/background_banner.jpg" className="absolute inset-0 w-full h-full object-cover opacity-20 blur-[2px]" alt="BG" />
 
       <div className="relative w-full max-w-md mx-auto bg-[#181818] bg-opacity-90 rounded-2xl shadow-2xl border border-[#333] px-8 py-10 flex flex-col items-center min-h-[480px]">
         <h2 className="text-3xl font-extrabold text-white text-center mb-8 drop-shadow-lg">AI Recommendation</h2>

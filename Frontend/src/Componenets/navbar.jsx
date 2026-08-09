@@ -1,6 +1,6 @@
 import { HelpCircle, LogOut, Search, Settings } from "lucide-react";
 import logo from "../assets/logo.jpg"
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import { useState } from "react";
 
@@ -34,17 +34,17 @@ const Navbar = () => {
   return (
     <div>
       <nav className="bg-black text-gray-400 flex justify-between items-center p-5 h-20 text-sm md:text-[15px] font-medium text-nowrap">
-        <label>
+        <Link to="/">
           <img src={logo} alt="NetFlix Logo" className="w-24 cursor-pointer" />
-        </label>
+        </Link>
         <ul className="hidden xl:flex space-x-6 ">
-          <Link to={'/'} className="cursor-pointer hover:text-[#e50914]">Home</Link>
-          <li className="cursor-pointer hover:text-[#e50914]">Tv Shows</li>
-          <li className="cursor-pointer hover:text-[#e50914]">Movies</li>
-          <li className="cursor-pointer hover:text-[#e50914]">Anime</li>
-          <li className="cursor-pointer hover:text-[#e50914]">Games</li>
-          <li className="cursor-pointer hover:text-[#e50914]">New & Popular</li>
-          <li className="cursor-pointer hover:text-[#e50914]">Upcoming</li>
+          <NavLink to="/" className={({ isActive }) => `cursor-pointer ${isActive ? "text-[#e50914]" : "hover:text-[#e50914]"}`}>Home</NavLink>
+          <NavLink to="/tv-shows" className={({ isActive }) => `cursor-pointer ${isActive ? "text-[#e50914]" : "hover:text-[#e50914]"}`}>Tv Shows</NavLink>
+          <NavLink to="/movies" className={({ isActive }) => `cursor-pointer ${isActive ? "text-[#e50914]" : "hover:text-[#e50914]"}`}>Movies</NavLink>
+          <NavLink to="/anime" className={({ isActive }) => `cursor-pointer ${isActive ? "text-[#e50914]" : "hover:text-[#e50914]"}`}>Anime</NavLink>
+          <NavLink to="/games" className={({ isActive }) => `cursor-pointer ${isActive ? "text-[#e50914]" : "hover:text-[#e50914]"}`}>Games</NavLink>
+          <NavLink to="/new-popular" className={({ isActive }) => `cursor-pointer ${isActive ? "text-[#e50914]" : "hover:text-[#e50914]"}`}>New &amp; Popular</NavLink>
+          <NavLink to="/upcoming" className={({ isActive }) => `cursor-pointer ${isActive ? "text-[#e50914]" : "hover:text-[#e50914]"}`}>Upcoming</NavLink>
         </ul>
 
         <div className="flex items-center space-x-4 relative">
@@ -60,8 +60,8 @@ const Navbar = () => {
               <Search className="w-5 h-5" />
             </button>
           </form>
-          <Link to={user?"ai-recommendations":"signin"}>
-                    <button className="bg-[#e50914] px-5 py-2 text-white cursor-pointer">
+          <Link to={user ? "/ai-recommendations" : "/signin"}>
+            <button className="bg-[#e50914] px-5 py-2 text-white cursor-pointer">
             Get AI Movie Picks
           </button>
           </Link>

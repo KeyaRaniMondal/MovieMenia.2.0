@@ -1,25 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import logo from "../assets/logo.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Link } from 'react-router-dom';
+import { TMDB_OPTIONS, movieImageUrl } from '../lib/tmdb';
 
 const CardList = ({ title = "Top Rated", category = "" }) => {
     const [data, setData] = useState([]);
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZTQ0NGFhNGJjZjI4ZjVlZTA2MTM0M2E3ZTVkNzM3OSIsIm5iZiI6MTc2OTQ2MDQxMy42OTkwMDAxLCJzdWIiOiI2OTc3ZDJiZGY5NzZlNDNmYmRhYmEzNWYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.cIpj8Qk8IIIxaEuFePPykJ1507B4CbeAzzMQUOJakbM'
-        }
-    };
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`, options)
+        fetch(`https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`, TMDB_OPTIONS)
             .then(res => res.json())
-            .then(res => setData(res.results))
+            .then(res => setData(res.results || []))
             .catch(err => console.error(err));
-    }, []);
+    }, [category]);
 
     return (
         <div className="text-white md:px-4">
@@ -30,9 +23,13 @@ const CardList = ({ title = "Top Rated", category = "" }) => {
                     data.map((item) => (
                         <SwiperSlide key={item.id} className="max-w-72">
                             <Link to={`/movie/${item.id}`}>
-                                <img src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`} alt={item.title} />
-                                <h3>{item.original_title}</h3>
-                                <p>{item.description}</p>
+                                {item.backdrop_path ? (
+                                    <img src={movieImageUrl(item.backdrop_path, "w500")} alt={item.title} />
+                                ) : (
+                                    <div className="w-72 h-40 bg-gray-700 flex items-center justify-center text-xs text-gray-400">No Image</div>
+                                )}
+                                <h3>{item.title || item.original_title}</h3>
+                                <p>{item.overview?.slice(0, 80) || "No description available."}</p>
 
                             </Link>
                         </SwiperSlide >

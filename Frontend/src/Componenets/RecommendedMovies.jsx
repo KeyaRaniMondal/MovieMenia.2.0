@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { TMDB_OPTIONS, movieImageUrl } from '../lib/tmdb';
 
 const RecommendedMovies = ({ movieTitles }) => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
-    const options = {
-        method: "GET",
-        headers: {
-            accept: "application/json",
-            Authorization: import.meta.env.VITE_Authorization
-            ,
-        },
-    };
 
     // Function to fetch a single movie's data from TMDB by its title
     const fetchMovie = async (title) => {
@@ -20,8 +13,8 @@ const RecommendedMovies = ({ movieTitles }) => {
         const url = `https://api.themoviedb.org/3/search/movie?query=${encodedTitle}`;
 
         try {
-            // 'options' refers to the TMDB API configuration (Bearer token/headers) 
-            const res = await fetch(url, options);
+            // 'TMDB_OPTIONS' refers to the TMDB API configuration (Bearer token/headers) 
+            const res = await fetch(url, TMDB_OPTIONS);
             const data = await res.json();
             // Return the first/most relevant result or null if none found
             return data.results && data.results.length > 0 ? data.results[0] : null;
@@ -65,7 +58,7 @@ const RecommendedMovies = ({ movieTitles }) => {
                     {/* Display the poster; use a fallback if the poster path is missing*/}
                     {movie.poster_path ? (
                         <img
-                            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                            src={movieImageUrl(movie.poster_path, "w500")}
                             alt={movie.title}
                             className="w-full h-48 object-cover"
                         />
