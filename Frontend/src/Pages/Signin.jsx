@@ -5,7 +5,7 @@ import { useAuthStore } from '../store/authStore.js';
 
 const SignIn = () => {
   const navigate=useNavigate();
-  const [username,setUsername]=useState('');
+  const [identifier,setIdentifier]=useState('');
   const [password,setPassword]=useState('');
   const [showSuccess,setShowSuccess]=useState(false);
   const { login, isLoading, error, message } = useAuthStore();
@@ -15,7 +15,7 @@ const SignIn = () => {
     setShowSuccess(false);
 
     try{
-      await login(username,password);
+      await login(identifier,password);
       setShowSuccess(true);
       setTimeout(() => navigate('/'), 800);
     }
@@ -37,9 +37,9 @@ const SignIn = () => {
         <form onSubmit={handleSignIn} className="flex flex-col space-y-4">
           <input
             type="text"
-            placeholder="username"
-            value={username}
-            onChange={(e)=>setUsername(e.target.value)}
+            placeholder="Username or Email"
+            value={identifier}
+            onChange={(e)=>setIdentifier(e.target.value)}
             className="w-full h-[50px] bg-[#333] text-white rouded px-5 text-base"
           />
           <input

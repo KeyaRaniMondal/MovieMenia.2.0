@@ -26,9 +26,9 @@ const Navbar = () => {
   };
 
   const handleLogout = async () => {
-    const message = await logout(); // Calls API and clears cookies
-    alert(message);
-    toggleMenu(); 
+    await logout(); // Calls API and clears cookies
+    toggleMenu();
+    navigate('/'); // redirect to home page after logout
   };
 
   return (

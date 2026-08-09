@@ -52,7 +52,10 @@ export const login = async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        const userDoc = await User.findOne({ username });
+        // allow users to sign in with either their username or email
+        const userDoc = await User.findOne({
+            $or: [{ username }, { email: (username || "").toLowerCase() }],
+        });
         if (!userDoc) {
             return res.status(400).json({ message: "Invalid username or password" });
         }
@@ -72,15 +75,20 @@ export const login = async (req, res) => {
 };
 
 export const fetchUser = async (req, res) => {
+    const { token } = req.cookies;
+
+    // not logged in - return null instead of an error so the client
+    // does not log a 401 on every page load
+    if (!token) {
+        return res.status(200).json({ user: null });
+    }
+
     try {
-        const userDoc = await User.findById(req.userId).select("-password");
-        if (!userDoc) {
-            return res.status(404).json({ message: "User not found" });
-        }
-        res.status(200).json({ user: userDoc });
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const userDoc = await User.findById(decoded.id).select("-password");
+        res.status(200).json({ user: userDoc || null });
     } catch (error) {
-        console.error("Error fetching user:", error);
-        res.status(500).json({ message: "Internal server error" });
+        res.status(200).json({ user: null });
     }
 };
 
