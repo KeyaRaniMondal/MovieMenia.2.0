@@ -2,14 +2,12 @@
 import { setServers } from 'node:dns/promises'
 setServers(['1.1.1.1', '8.8.8.8'])
 
+import 'dotenv/config';
 import express from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { connectToDB } from './config/db.js';
 import authRoutes from './routes/auth.routes.js';
-
-dotenv.config();
 
 const app = express();
 

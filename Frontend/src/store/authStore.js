@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
+import { signInWithGoogle } from "../lib/firebase";
 
 axios.defaults.withCredentials = true; // Enable sending cookies with requests
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
@@ -44,6 +45,29 @@ export const useAuthStore = create((set) => ({
           error.response?.data?.message ||
           error.message ||
           "Error logging in",
+      });
+      throw error;
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+
+  googleLogin: async () => {
+    set({ isLoading: true, error: null, message: null });
+
+    try {
+      const idToken = await signInWithGoogle();
+      const response = await axios.post(`${API_URL}/api/google-login`, {
+        idToken,
+      });
+      set({ user: response.data.user, message: response.data.message });
+      return response.data;
+    } catch (error) {
+      set({
+        error:
+          error.response?.data?.message ||
+          error.message ||
+          "Error signing in with Google",
       });
       throw error;
     } finally {

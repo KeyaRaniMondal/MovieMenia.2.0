@@ -8,9 +8,10 @@ const Navbar = () => {
   const { user, logout } = useAuthStore()
   const navigate = useNavigate();
   const avatarURL = user
-    ? `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
-      user.username
-    )}`
+    ? user.avatar ||
+      `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
+        user.username
+      )}`
     : null;
 
   const [showMenu, setShowMenu] = useState(false);

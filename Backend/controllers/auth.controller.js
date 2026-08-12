@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { verifyGoogleIdToken } from "../config/firebase.config.js";
 
 const createTokenAndSetCookie = (userId, res) => {
     const token = jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: "5d" });
@@ -95,4 +96,64 @@ export const fetchUser = async (req, res) => {
 export const logout = (req, res) => {
     res.clearCookie("token");
     res.status(200).json({ message: "Logged out successfully" });
+};
+
+const sanitizeUsername = (name, email) => {
+    const base = (name || email.split("@")[0])
+        .replace(/[^a-zA-Z0-9_.]/g, "_")
+        .toLowerCase();
+    return base || "user";
+};
+
+export const googleLogin = async (req, res) => {
+    const { idToken } = req.body;
+
+    if (!idToken) {
+        return res.status(400).json({ message: "Google ID token is required" });
+    }
+
+    try {
+        const decodedToken = await verifyGoogleIdToken(idToken);
+        const { email, name, picture, email_verified } = decodedToken;
+
+        if (!email) {
+            return res.status(400).json({ message: "Google account has no email" });
+        }
+        if (!email_verified) {
+            return res.status(400).json({ message: "Google email is not verified" });
+        }
+
+        let userDoc = await User.findOne({ email });
+
+        if (!userDoc) {
+            // Google users have no password; store a random hash so the field stays required
+            const randomPassword = await bcrypt.hash(
+                Math.random().toString(36).slice(2) + Date.now().toString(36),
+                10
+            );
+
+            let username = sanitizeUsername(name, email);
+            if (await User.findOne({ username })) {
+                username = `${username}_${Math.random().toString(36).slice(2, 8)}`;
+            }
+
+            userDoc = await User.create({
+                username,
+                email,
+                password: randomPassword,
+                provider: "google",
+                avatar: picture || null,
+            });
+        }
+
+        createTokenAndSetCookie(userDoc._id, res);
+
+        res.status(200).json({ user: userDoc, message: "Logged in with Google successfully" });
+    } catch (error) {
+        console.error("Error during Google login:", error);
+        res.status(500).json({
+            message: "Google authentication failed",
+            error: error.message,
+        });
+    }
 };
