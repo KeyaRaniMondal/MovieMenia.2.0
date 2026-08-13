@@ -95,7 +95,7 @@ const CategoryPage = ({ type }) => {
   }, [config, activeTab, key]);
 
   return (
-    <div className="min-h-screen bg-[#181818] text-white px-4 md:px-8 py-8">
+    <div className="min-h-screen bg-[var(--page)] text-[var(--ink)] px-4 md:px-8 py-8">
       <h1 className="text-3xl font-bold mb-6">{config.title}</h1>
 
       <div className="flex flex-wrap gap-3 mb-8">
@@ -106,7 +106,7 @@ const CategoryPage = ({ type }) => {
             className={`px-5 py-2 rounded-full text-sm font-medium transition ${
               activeTab === index
                 ? "bg-[#e50914] text-white"
-                : "bg-[#232323] text-gray-300 hover:bg-[#333]"
+                : "bg-[var(--surface)] text-[var(--muted)] hover:bg-[var(--field)]"
             }`}
           >
             {tab.label}
@@ -114,12 +114,12 @@ const CategoryPage = ({ type }) => {
         ))}
       </div>
 
-      {loading && <p className="text-gray-400">Loading...</p>}
+      {loading && <p className="text-[var(--muted)]">Loading...</p>}
 
       {!loading && error && <p className="text-red-500">{error}</p>}
 
       {!loading && !error && items.length === 0 && (
-        <p className="text-gray-400">No content available.</p>
+        <p className="text-[var(--muted)]">No content available.</p>
       )}
 
       {!loading && !error && items.length > 0 && (
@@ -128,7 +128,7 @@ const CategoryPage = ({ type }) => {
             <Link
               to={linkFor(item, type)}
               key={item.id}
-              className="bg-[#232323] rounded-lg overflow-hidden hover:scale-105 transition duration-300"
+              className="bg-[var(--surface)] rounded-lg overflow-hidden hover:scale-105 transition duration-300"
             >
               {item.poster_path ? (
                 <img
@@ -143,7 +143,7 @@ const CategoryPage = ({ type }) => {
               )}
               <div className="p-3">
                 <h3 className="text-sm font-semibold truncate">{item.title || item.name}</h3>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-[var(--muted)]">
                   {(item.release_date || item.first_air_date || "").slice(0, 4) || "N/A"}
                 </p>
               </div>

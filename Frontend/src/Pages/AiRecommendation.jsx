@@ -71,7 +71,7 @@ const AIRecommendations = () => {
   if (recommendations.length > 0) {
     return (
       <div className="w-full max-w-7xl mx-auto px-8 mt-2">
-        <h2 className="text-2xl font-bold text-white text-center mb-4">AI Recommended Movies</h2>
+        <h2 className="text-2xl font-bold text-[var(--ink)] text-center mb-4">AI Recommended Movies</h2>
         <RecommendedMovies movieTitles={recommendations} />
       </div>
     );
@@ -81,23 +81,23 @@ const AIRecommendations = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#181818] via-[#232323] to-[#181818] relative overflow-hidden">
 
-      <div className="relative w-full max-w-md mx-auto bg-[#181818] bg-opacity-90 rounded-2xl shadow-2xl border border-[#333] px-8 py-10 flex flex-col items-center min-h-[480px]">
-        <h2 className="text-3xl font-extrabold text-white text-center mb-8 drop-shadow-lg">AI Recommendation</h2>
+      <div className="relative w-full max-w-md mx-auto bg-[var(--page)] bg-opacity-90 rounded-2xl shadow-2xl border border-[var(--line)] px-8 py-10 flex flex-col items-center min-h-[480px]">
+        <h2 className="text-3xl font-extrabold text-[var(--ink)] text-center mb-8 drop-shadow-lg">AI Recommendation</h2>
 
         {/* Dynamic Progress Bar */}
         <div className="w-full flex items-center mb-8">
-          <div className="flex-1 h-2 bg-[#232323] rounded-full overflow-hidden">
+          <div className="flex-1 h-2 bg-[var(--surface)] rounded-full overflow-hidden">
             <div
               className="h-full bg-[#E50914] transition-all duration-300"
               style={{ width: `${((step + 1) / steps.length) * 100}%` }}
             ></div>
           </div>
-          <span className="ml-4 text-white text-sm font-semibold">{step + 1} / {steps.length}</span>
+          <span className="ml-4 text-[var(--ink)] text-sm font-semibold">{step + 1} / {steps.length}</span>
         </div>
 
         {/* Current Question and Options Grid  */}
         <div className="w-full flex flex-col flex-1">
-          <h3 className="text-lg font-semibold text-white text-center mb-6">{steps[step].label}</h3>
+          <h3 className="text-lg font-semibold text-[var(--ink)] text-center mb-6">{steps[step].label}</h3>
           <div className="grid grid-cols-1 gap-3">
             {steps[step].options.map((option) => (
               <button
@@ -105,7 +105,7 @@ const AIRecommendations = () => {
                 onClick={() => handleOption(option)}
                 className={`w-full py-3 rounded-xl border-2 transition duration-150 active:scale-95 ${input[steps[step].name] === option
                     ? "bg-[#E50914] border-[#E50914] text-white shadow-lg"
-                    : "bg-[#232323] border-[#444] text-white hover:bg-[#E50914] hover:border-[#E50914]"
+                    : "bg-[var(--surface)] border-[var(--line)] text-[var(--ink)] hover:bg-[#E50914] hover:text-white hover:border-[#E50914]"
                   }`}
               >
                 {option}
@@ -119,7 +119,7 @@ const AIRecommendations = () => {
           <button
             disabled={step === 0}
             onClick={handleBack}
-            className="px-6 py-2 rounded-lg border-2 border-[#444] text-white font-semibold hover:bg-[#232323] disabled:opacity-50"
+            className="px-6 py-2 rounded-lg border-2 border-[var(--line)] text-[var(--ink)] font-semibold hover:bg-[var(--surface)] disabled:opacity-50"
           >
             Back
           </button>

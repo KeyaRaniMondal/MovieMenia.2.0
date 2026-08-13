@@ -15,7 +15,7 @@ const CardList = ({ title = "Top Rated", category = "" }) => {
     }, [category]);
 
     return (
-        <div className="text-white md:px-4">
+        <div className="text-[var(--ink)] md:px-4">
             <h2 className="pt-10 pb-5 text-lg font-medium">{title}</h2>
 
             <Swiper slidesPerView={"auto"} spaceBetween={10} className="mySwiper">

@@ -12,6 +12,8 @@ import AIRecommendations from './Pages/AiRecommendation'
 import SearchPage from './Pages/SearchPage'
 import CategoryPage from './Pages/CategoryPage'
 import GamesPage from './Pages/GamesPage'
+import HelpCenter from './Pages/HelpCenter'
+import Settings from './Pages/Settings'
 
 function App() {
  const {fetchUser,fetchingUser}=useAuthStore()
@@ -42,6 +44,8 @@ if(fetchingUser){
     <Route path='/signup' element={<SignUp/>}/>
     <Route path='/ai-recommendations' element={<AIRecommendations/>}/>
     <Route path='/search' element={<SearchPage/>}/>
+    <Route path='/help' element={<HelpCenter/>}/>
+    <Route path='/settings' element={<Settings/>}/>
   </Routes>
 </div>
     </>

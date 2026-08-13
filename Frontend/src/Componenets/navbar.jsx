@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="bg-black text-gray-400 flex justify-between items-center p-5 h-20 text-sm md:text-[15px] font-medium text-nowrap">
+      <nav className="bg-[var(--page)] border-b border-[var(--line)] text-[var(--muted)] flex justify-between items-center p-5 h-20 text-sm md:text-[15px] font-medium text-nowrap">
         <Link to="/">
           <img src={logo} alt="NetFlix Logo" className="w-24 cursor-pointer" />
         </Link>
@@ -52,7 +52,7 @@ const Navbar = () => {
           <form onSubmit={handleSearch} className="relative hidden md:inline-flex">
             <input 
               type="text" 
-              className="bg-[#333333] px-4 py-2 border rounded-full min-w-72 pr-10 outline-none focus:border-[#e50914]" 
+              className="bg-[var(--field)] px-4 py-2 border rounded-full min-w-72 pr-10 outline-none focus:border-[#e50914]" 
               placeholder="Search......"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -69,6 +69,7 @@ const Navbar = () => {
 
           {user ? (
             <>
+              <div className="relative">
               <img
                 src={avatarURL}
                 onClick={() => setShowMenu(!showMenu)}
@@ -78,36 +79,43 @@ const Navbar = () => {
 
               {/* Conditional Rendering of the Dropdown Menu */}
               {showMenu && (
-                <div className="absolute right-0 mt-2 w-64 bg-[#232323] bg-opacity-95 rounded-lg z-50 shadow-lg py-4 px-3 flex flex-col gap-2 border border-[#333333]">
+                <div className="absolute right-0 top-full mt-2 w-64 bg-[var(--surface)] rounded-lg z-50 shadow-lg py-4 px-3 flex flex-col gap-2 border border-[var(--line)]">
                   {/* User Information Section */}
                   <div className="flex flex-col items-center mb-2">
-                    <span className="text-white font-semibold text-base">
+                    <span className="text-[var(--ink)] font-semibold text-base">
                       {user.username}
                     </span>
-                    <span className="text-xs text-gray-400">{user.email}</span>
+                    <span className="text-xs text-[var(--muted)]">{user.email}</span>
                   </div>
 
                   {/* Menu Action Buttons */}
-                  <button className="flex items-center px-4 py-3 rounded-lg text-white bg-[#181818] hover:bg-[#1D1C1C] gap-3 cursor-pointer">
+                  <button
+                    onClick={() => { navigate('/help'); toggleMenu(); }}
+                    className="flex items-center px-4 py-3 rounded-lg text-[var(--ink)] bg-[var(--page)] hover:bg-[var(--surface-hover)] gap-3 cursor-pointer"
+                  >
                     <HelpCircle className="w-5 h-5" /> Help Center
                   </button>
 
-                  <button className="flex items-center px-4 py-3 rounded-lg text-white bg-[#181818] hover:bg-[#1D1C1C] gap-3 cursor-pointer">
+                  <button
+                    onClick={() => { navigate('/settings'); toggleMenu(); }}
+                    className="flex items-center px-4 py-3 rounded-lg text-[var(--ink)] bg-[var(--page)] hover:bg-[var(--surface-hover)] gap-3 cursor-pointer"
+                  >
                     <Settings className="w-5 h-5" /> Settings
                   </button>
 
                   <button
                     onClick={handleLogout}
-                    className="flex items-center px-4 py-3 rounded-lg text-white bg-[#181818] hover:bg-[#1D1C1C] gap-3 cursor-pointer"
+                    className="flex items-center px-4 py-3 rounded-lg text-[var(--ink)] bg-[var(--page)] hover:bg-[var(--surface-hover)] gap-3 cursor-pointer"
                   >
                     <LogOut className="w-5 h-5" /> Log out
                   </button>
                 </div>
               )}
+              </div>
             </>
           ) : (
             <Link to="/signin">
-              <button className="border px-5 py-2 text-white cursor-pointer">
+              <button className="border border-[var(--line)] px-5 py-2 text-[var(--ink)] cursor-pointer">
                 Sign In
               </button>
             </Link>

@@ -40,21 +40,21 @@ const SearchPage = () => {
     }, [query, hasQuery]);
 
     return (
-        <div className="min-h-screen bg-[#181818] text-white px-4 md:px-8 py-8">
+        <div className="min-h-screen bg-[var(--page)] text-[var(--ink)] px-4 md:px-8 py-8">
             <h1 className="text-2xl font-bold mb-6">
                 {hasQuery ? `Results for "${query}"` : "Search Movies"}
             </h1>
 
-            {loading && <p className="text-gray-400">Searching...</p>}
+            {loading && <p className="text-[var(--muted)]">Searching...</p>}
 
             {!loading && error && <p className="text-red-500">{error}</p>}
 
             {!loading && !error && !hasQuery && (
-                <p className="text-gray-400">Type a movie name in the search bar above.</p>
+                <p className="text-[var(--muted)]">Type a movie name in the search bar above.</p>
             )}
 
             {!loading && !error && hasQuery && movies.length === 0 && (
-                <p className="text-gray-400">No movies found. Try a different search.</p>
+                <p className="text-[var(--muted)]">No movies found. Try a different search.</p>
             )}
 
             {!loading && !error && movies.length > 0 && (
@@ -63,7 +63,7 @@ const SearchPage = () => {
                         <Link
                             to={`/movie/${movie.id}`}
                             key={movie.id}
-                            className="bg-[#232323] rounded-lg overflow-hidden hover:scale-105 transition duration-300"
+                            className="bg-[var(--surface)] rounded-lg overflow-hidden hover:scale-105 transition duration-300"
                         >
                             {movie.poster_path ? (
                                 <img
@@ -78,7 +78,7 @@ const SearchPage = () => {
                             )}
                             <div className="p-3">
                                 <h3 className="text-sm font-semibold truncate">{movie.title}</h3>
-                                <p className="text-xs text-gray-400">
+                                <p className="text-xs text-[var(--muted)]">
                                     {movie.release_date ? movie.release_date.slice(0, 4) : "N/A"}
                                 </p>
                             </div>

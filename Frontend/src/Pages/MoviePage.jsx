@@ -38,7 +38,7 @@ const MoviePage = ({ type = "movie" }) => {
         return <div className="text-red-500 justify-center">Loading...</div>
     }
     return (
-        <div className="min-h-screen bg-[#181818] text-white">
+        <div className="min-h-screen bg-[var(--page)] text-[var(--ink)]">
             <div className="relative h-[60vh] flex item-end"
                 style={
                     {
@@ -47,7 +47,7 @@ const MoviePage = ({ type = "movie" }) => {
                         backgroundPosition: 'center',
                     }
                 }>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--page)] via-transparent to-transparent"></div>
 
                 <div className="relative z-10 flex items-end p-8 gap-8">
                     {movieData.poster_path && (
@@ -72,7 +72,7 @@ const MoviePage = ({ type = "movie" }) => {
                                 </span>
                             ))}
                         </div>
-                        <p className="max-w-2xl text-gray-200">{movieData.overview}</p>
+                        <p className="max-w-2xl text-[var(--ink)]">{movieData.overview}</p>
                         {/* will open video in new tab in youtube */}
                         {trailers ? (
                             <a href={`https://www.youtube.com/watch?v=${trailers}`} target="_blank" rel="noopener noreferrer">
@@ -86,25 +86,25 @@ const MoviePage = ({ type = "movie" }) => {
             </div>
             <div className="p-8">
                 <h2 className="text-2xl font-semibold mb-4">Details</h2>
-                <div className="bg-[#232323] rounded-lg shadow-lg p-6 flex flex-col md:flex-row gap-8">
+                <div className="bg-[var(--surface)] rounded-lg shadow-lg p-6 flex flex-col md:flex-row gap-8">
                     <div className="flex-1">
                         <ul>
                             <li>
-                                <span className="font-semibold text-white">Status:</span>
+                                <span className="font-semibold text-[var(--ink)]">Status:</span>
                                 <span className="ml-2">{movieData.status}</span>
                             </li>
                             <li>
-                                <span className="font-semibold text-white">Release Date:</span>
+                                <span className="font-semibold text-[var(--ink)]">Release Date:</span>
                                 <span className="ml-2">{movieData.release_date || movieData.first_air_date || "N/A"}</span>
                             </li>
                             {isTv && (
                                 <>
                                     <li>
-                                        <span className="font-semibold text-white">Seasons:</span>
+                                        <span className="font-semibold text-[var(--ink)]">Seasons:</span>
                                         <span className="ml-2">{movieData.number_of_seasons ?? "N/A"}</span>
                                     </li>
                                     <li>
-                                        <span className="font-semibold text-white">Episodes:</span>
+                                        <span className="font-semibold text-[var(--ink)]">Episodes:</span>
                                         <span className="ml-2">{movieData.number_of_episodes ?? "N/A"}</span>
                                     </li>
                                 </>
@@ -112,34 +112,34 @@ const MoviePage = ({ type = "movie" }) => {
                             {!isTv && (
                                 <>
                                     <li>
-                                        <span className="font-semibold text-white">Budget:</span>
+                                        <span className="font-semibold text-[var(--ink)]">Budget:</span>
                                         <span className="ml-2">{movieData.budget ? `$${movieData.budget.toLocaleString()}` : "N/A"}</span>
                                     </li>
                                     <li>
-                                        <span className="font-semibold text-white">Revenue:</span>
+                                        <span className="font-semibold text-[var(--ink)]">Revenue:</span>
                                         <span className="ml-2">{movieData.revenue ? `$${movieData.revenue.toLocaleString()}` : "N/A"}</span>
                                     </li>
                                 </>
                             )}
                             <li>
-                                <span className="font-semibold text-white">Original Language:</span>
+                                <span className="font-semibold text-[var(--ink)]">Original Language:</span>
                                 <span className="ml-2">{movieData.original_language?.toUpperCase()}</span>
                             </li>
                             <li>
-                                <span className="font-semibold text-white">Production Companies:</span>
+                                <span className="font-semibold text-[var(--ink)]">Production Companies:</span>
                                 <span className="ml-2 word-wrap">{movieData.production_companies && movieData.production_companies.length > 0 ? movieData.production_companies.map((m) => m.name).join(", ") : "N/A"}</span>
                             </li>
                             <li>
-                                <span className="font-semibold text-white">Spoken Languages:</span>
+                                <span className="font-semibold text-[var(--ink)]">Spoken Languages:</span>
                                 <span className="ml-2">{movieData.spoken_languages && movieData.spoken_languages.length > 0 ? movieData.spoken_languages.map((m) => m.name).join(", ") : "N/A"}</span>
                             </li>
                         </ul>
                     </div>
                     <div className="flex-1">
                         <h3>Tagline</h3>
-                        <p className="text-gray-400 italic">{movieData.tagline || "No Tagline Available."}</p>
+                        <p className="text-[var(--muted)] italic">{movieData.tagline || "No Tagline Available."}</p>
                         <h3>Overview</h3>
-                        <p className="text-gray-400 italic">{movieData.overview || "No Overview Available."}</p>
+                        <p className="text-[var(--muted)] italic">{movieData.overview || "No Overview Available."}</p>
                     </div>
                 </div>
                 {/* Recommendations Section */}
@@ -156,13 +156,13 @@ const MoviePage = ({ type = "movie" }) => {
                                             <div className="rounded-lg bg-gray-700 w-32 h-48 flex items-center justify-center text-xs text-gray-300">No Image</div>
                                         )}
                                         <h3 className="mt-2 text-sm">{rec.title || rec.name}</h3>
-                                        <span className="text-sm text-gray-400">{(rec.release_date || rec.first_air_date || "").slice(0, 4) || '—'}</span>
+                                        <span className="text-sm text-[var(--muted)]">{(rec.release_date || rec.first_air_date || "").slice(0, 4) || '—'}</span>
                                     </Link>
                                 </div>
                             ))}
                         </div>
                     ) : (
-                        <p className="text-gray-400">No recommendations available.</p>
+                        <p className="text-[var(--muted)]">No recommendations available.</p>
                     )}
                 </div>
             </div>

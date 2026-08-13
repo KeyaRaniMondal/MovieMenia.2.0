@@ -44,7 +44,7 @@ const RecommendedMovies = ({ movieTitles }) => {
     }, [movieTitles]);
 
     if (loading) {
-        return <p className="text-white text-center mt-10">Loading recommended movies...</p>;
+        return <p className="text-[var(--ink)] text-center mt-10">Loading recommended movies...</p>;
     }
 
     return (
@@ -53,7 +53,7 @@ const RecommendedMovies = ({ movieTitles }) => {
                 <Link
                     to={`/movie/${movie.id}`}
                     key={movie.id}
-                    className="bg-[#232323] rounded-lg overflow-hidden hover:scale-105 transition duration-300"
+                    className="bg-[var(--surface)] rounded-lg overflow-hidden hover:scale-105 transition duration-300"
                 >
                     {/* Display the poster; use a fallback if the poster path is missing*/}
                     {movie.poster_path ? (
@@ -67,8 +67,8 @@ const RecommendedMovies = ({ movieTitles }) => {
                     )}
 
                     <div className="p-2"> {/* [13] */}
-                        <h3 className="text-sm font-semibold text-white truncate">{movie.title}</h3>
-                        <p className="text-xs text-gray-400">
+                        <h3 className="text-sm font-semibold text-[var(--ink)] truncate">{movie.title}</h3>
+                        <p className="text-xs text-[var(--muted)]">
                             {/* Extract only the year from the release date string */}
                             {movie.release_date ? movie.release_date.slice(0, 4) : 'N/A'}
                         </p>
