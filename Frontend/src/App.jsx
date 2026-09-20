@@ -14,6 +14,7 @@ import CategoryPage from './Pages/CategoryPage'
 import GamesPage from './Pages/GamesPage'
 import HelpCenter from './Pages/HelpCenter'
 import Settings from './Pages/Settings'
+import Footer from './Componenets/footer'
 
 function App() {
  const {fetchUser,fetchingUser}=useAuthStore()
@@ -47,6 +48,7 @@ if(fetchingUser){
     <Route path='/help' element={<HelpCenter/>}/>
     <Route path='/settings' element={<Settings/>}/>
   </Routes>
+  <Footer/>
 </div>
     </>
   )
