@@ -52,7 +52,7 @@ const CardList = ({ title = "Top Rated", category = "" }) => {
 
                                 <div className="p-3 pb-4">
                                     <h3 className="text-xl font-black tracking-tight leading-snug text-[var(--ink)] mb-3">
-                                        {movieTitle}
+                                        {movieTitle.length > 15 ? movieTitle.slice(0, 15) + "..." : movieTitle}
                                     </h3>
                                 </div>
                             </Link>

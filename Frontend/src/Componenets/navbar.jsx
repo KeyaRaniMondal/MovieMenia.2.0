@@ -36,7 +36,7 @@ const Navbar = () => {
     <div>
       <nav className="bg-[var(--page)] border-b border-[var(--line)] text-[var(--muted)] flex justify-between items-center p-5 h-20 text-sm md:text-[15px] font-medium text-nowrap">
         <Link to="/">
-          <img src={logo} alt="NetFlix Logo" className="w-24 cursor-pointer" />
+          <img src={logo} alt="NetFlix Logo" className="w-20 cursor-pointer rounded-full" />
         </Link>
         <ul className="hidden xl:flex space-x-6 ">
           <NavLink to="/" className={({ isActive }) => `cursor-pointer ${isActive ? "text-[#e50914]" : "hover:text-[#e50914]"}`}>Home</NavLink>
